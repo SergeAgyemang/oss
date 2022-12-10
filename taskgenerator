@@ -1,0 +1,75 @@
+#include <stdio.h>          
+#include <stdlib.h>
+#include <time.h>
+// Task Generator 
+struct TaskType { 
+  char name; //  Name of Task
+  int computation;// 1= fast , 3=medium ,  5=slow, 10=very slow
+  int Arrival_index;// Defined using statstics and assumpution 
+                      //of probablity of occurence over 24h basis
+  int wcet;   //  The WCET of task  int Arrival_time;           
+  int Priority; // 1 = HIGH , 2= MEDIUM , 3=LOW
+  int Deadline; // -1=no deadline, deadline=Amount of time task must be completed by after it has started,
+  int Period;
+};
+
+struct TaskType  TaskGenerator(int time,int amount){ // Time must be an integer between 1 and 24h
+
+struct TaskType Withdrawl;  Withdrawl.name='Withdrawl';
+struct TaskType Deposit; Deposit.name='Deposit';
+struct TaskType Loans; Loans.name='Loans';
+struct TaskType account_management; account_management.name='account_management';
+struct TaskType domiciliations; domiciliations.name='domiciliations';
+struct TaskType CardStop; CardStop.name='CardStop';
+struct TaskType PreviousTransactionReport; PreviousTransactionReport.name='PreviousTransactionReport';
+struct TaskType InteresetRate; InteresetRate.name='InteresetRate';
+struct TaskType ForeignCurrencyBalance; ForeignCurrencyBalance.name='ForeignCurrencyBalance';
+// Priority definition
+  CardStop.Priority=1; 
+    Deposit.Priority=2; Withdrawl.Priority=2; 
+    domiciliations.Priority=2; Loans.Priority=2;
+        PreviousTransactionReport.Priority=3; InteresetRate.Priority=3
+        ; ForeignCurrencyBalance.Priority=3;
+             account_management.Priority=3;
+// Execution Time -- no unit is defined 
+  //  What matters is the relative time it takes compares to other tasks
+ CardStop.computation=1;
+      domiciliations.computation=2;Deposit.computation=2;Withdrawl.computation=2;
+      InteresetRate.computation=5;ForeignCurrencyBalance.computation=5;Loans.computation=5;
+          PreviousTransactionReport.computation=7;account_management.computation=7;
+          //Period
+          CardStop.Period=10;
+      domiciliations.Period=6;Deposit.Period=6;Withdrawl.Period=6;
+      InteresetRate.Period=8;ForeignCurrencyBalance.computation=8;Loans.Period=8;
+          PreviousTransactionReport.Period=10;account_management.Period=10;
+//  CardStop.Priority=1; 
+    Deposit.Priority=2; Withdrawl.Priority=2; 
+    domiciliations.Priority=2; Loans.Priority=2;
+        PreviousTransactionReport.Priority=3; InteresetRate.Priority=3;
+         ForeignCurrencyBalance.Priority=3;
+             account_management.Priority=3;
+
+    struct TaskType  liste[9]={Withdrawl,Deposit,Loans,account_management,domiciliations,CardStop,PreviousTransactionReport,InteresetRate,
+    ForeignCurrencyBalance};
+    struct TaskType  x;
+
+          x=liste[rand()%9];
+           x.wcet=x.computation;
+
+return x;
+}
+
+int main()
+{
+  int amount=100;
+  struct TaskType  myIntArray2[amount];
+  int i;
+  for (i = 0; i <= amount; ++i)
+  {
+      printf("%s", TaskGenerator(0,10) );
+
+    
+    }
+      return 0; 
+
+}
